@@ -41,30 +41,32 @@ public class Velha {
 
     public static void jogada(short posicaoTabuleiro, boolean human){
 
-        if(numbers[posicaoTabuleiro-1] == 0){
-            System.out.print("Essa posicão ja está marcada tente outra");
-        }
+       if(numbers[posicaoTabuleiro-1] == 0){
+           System.out.print("Essa posicão ja está marcada tente outra");
+      }
 
 
 
-        if(human){
-            if(Objects.equals(tab[posicaoTabuleiro - 1], "_ ")) {
+        if(human) {
+            if (Objects.equals(tab[posicaoTabuleiro - 1], "_ ")) {
                 tab[posicaoTabuleiro - 1] = "X ";
-                posicao = (short) (Math.random() * 9 + 1);
-                jogada(posicao, false);
-                tabuleiro();
-            }
-        }else{
-            if(Objects.equals(tab[posicaoTabuleiro - 1], "_ ")){
-                    if (posicaoTabuleiro == numbers[posicaoTabuleiro - 1]) {
-                        tab[posicaoTabuleiro - 1] = "O ";
-                        numbers[posicaoTabuleiro - 1] = 0;
+                do {
+                    posicao = (short) (Math.random() * 9);
+                } while (numbers[posicao] == 0);
+                if (Objects.equals(tab[posicao], "_ ")) {
+                    if (numbers[posicao] != 0) {
+                        tab[posicao] = "O ";
+                        numbers[posicao] = 0;
+                        //jogada(posicao, true);
+                        // tabuleiro();
                     }
+                    jogada(posicaoTabuleiro, false);
+                    tabuleiro();
+                }
 
-                jogada(posicaoTabuleiro,true);
-                tabuleiro();
             }
         }
+
 
         //numbers[posicaoTabuleiro-1] = 0;
     }
